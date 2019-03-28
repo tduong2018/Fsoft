@@ -38,3 +38,61 @@ public Task GetText()
 
             return result;
         }
+        
+        
+        -----------------------------------------------
+        
+        
+<div id="test">
+    <div style="font-size: 50px; color: #dcbbbb; cursor: pointer" id="startForm">
+        @for (var i = 1; i < 6; i++)
+        {
+            <button id="start_@i" value="@i">&#9733;</button>
+        }
+    </div>
+</div>
+
+<span id="lbStar"></span>
+
+<style>
+    button {
+        outline: none;
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: 0;
+    }
+    .hover {
+        color: #ff7500;
+    }
+</style>
+
+<script>
+    var numSelected = 0;
+    var str;
+    $("button").hover(function () {
+        $(this).css("color", "#ff7500");
+        $(this).prevAll().css("color", "#ff7500");
+    });
+    $("button").mouseout(function (s, e) {
+        if (numSelected > 0) {
+            if (s.currentTarget.value > numSelected && s.currentTarget.value <= 5) {
+                $("#startForm").children().each(function (e) {
+                    if ((e + 1) > numSelected) {
+                        $(this).css("color", "#dcbbbb");
+                    }
+                });
+            }
+        }else{
+            $(this).css("color", "#dcbbbb")
+            $(this).prevAll().css("color", "#dcbbbb")
+        }
+    });
+    $("button").click(function (s, e) {
+        numSelected = s.currentTarget.value;
+        str = $("startForm").html();
+        $(this).css("color", "#dcbbbb");
+        $(this).prevAll().css("color", "#dcbbbb");
+        $(this).nextAll().css("color", "#dcbbbb");
+    });
+</script>
